@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Birewa Audrey AAMONA</h1>
+<h1 align="center">Hi 👋, I'm Birewa Audrey AMONA</h1>
 <h3 align="center">A passionate full stack developer from Togo</h3>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=dreykovic" alt="dreykovic" /></a> </p>
