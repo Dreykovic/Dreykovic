@@ -21,7 +21,7 @@
 
 <p align="left">I'm .Drey from Togo<br><br>- 🔭 I’m working as Backend developer<br>- 📚 I'm currently learning Web3<br>- ⚡ In my free time I like playing chess</p>
 
-[![committers.top badge](https://user-badge.committers.top/togo/USERNAME.svg)](https://user-badge.committers.top/togo/USERNAME)
+[![committers.top badge](https://user-badge.committers.top/togo/USERNAME.svg)](https://user-badge.committers.top/togo/Dreykovic)
 
 ###
 
