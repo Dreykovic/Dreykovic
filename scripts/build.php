@@ -188,7 +188,7 @@ foreach ($THEMES as $theme => $t) {
     $b .= '<text x="46" y="182" font-family="'.SERIF.'" font-size="84" font-weight="900" letter-spacing="-1.8" fill="'.$t['ink'].'">Birewa Audrey</text>';
     $b .= '<text x="46" y="268" font-family="'.SERIF.'" font-size="84" font-weight="900" letter-spacing="-1.8" fill="'.$t['ink'].'">Amona<tspan fill="'.$t['goldFill'].'">.</tspan></text>';
     // stat pills
-    $stats = [[count($rows), 'projects'], [count($cols), 'skill threads'], [$techCount, 'technologies']];
+    $stats = [[count($cols), 'skill families'], [$techCount, 'technologies'], [count($rows), 'projects']];
     $x = 50;
     foreach ($stats as [$n, $label]) {
         $nw = mb_strlen((string) $n) * 17 + 4;
@@ -227,10 +227,9 @@ foreach ($THEMES as $theme => $t) {
 
 // ── section headings (800 wide for the same reason as the header) ──
 $heads = [
-    'work' => ['nkyinkyim', '01 · '.mb_strtoupper($site['copy']['en']['work']['label']), $site['copy']['en']['work']['title']],
-    'open' => ['neaonnim', '02 · OPEN SOURCE', 'Code you can read.'],
-    'weave' => ['akomantoso', '03 · THE WEAVE', 'The pattern is the work.'],
-    'contact' => ['sankofa', '04 · SAY HELLO', 'Got a project to set afloat?'],
+    'skills' => ['neaonnim', '01 · SKILLS', 'What I work with.'],
+    'now' => ['aya', '02 · NOW', 'What I’m building.'],
+    'contact' => ['sankofa', '03 · SAY HELLO', 'Got a project to set afloat?'],
 ];
 foreach ($heads as $key => [$sym, $over, $title]) {
     foreach ($THEMES as $theme => $t) {
@@ -241,81 +240,82 @@ foreach ($heads as $key => [$sym, $over, $title]) {
     }
 }
 
-// ── project signatures: one band per thread, as wide as its share of the stack ──
-// for the projects README.md shows: the featured ones and the public ones
-const SHOWN = ['cape-coast-logbook', 'issue-runner'];
-foreach (array_filter($rows, fn ($p) => ! empty($p['featured']) || in_array($p['slug'], SHOWN, true)) as $p) {
-    foreach ($THEMES as $theme => $t) {
-        $W = 800;
-        $total = array_sum(array_map('count', $p['fam'])) ?: 1;
-        $b = '';
-        $x = 0;
-        foreach ($cols as $f) {
-            if (! isset($p['fam'][$f['id']])) {
-                continue;
+// ── skills: each family, how many projects use it, and its most used technologies ──
+// Raw stack entries are written for case studies; these make them read as skills.
+const ALIAS = [
+    'spatie/laravel-permission' => 'Spatie Permission', 'HTML/CSS' => 'HTML / CSS', 'HTML' => 'HTML / CSS', 'CSS' => 'HTML / CSS',
+    'DomPDF / FPDI' => 'DomPDF', 'Taches planifiees' => 'Scheduled jobs', 'Tâches planifiées' => 'Scheduled jobs',
+    "File d'attente base de donnees" => 'Queues', 'Hébergement mutualisé' => 'Shared hosting', 'Laravel Echo + Pusher' => 'Echo + Pusher',
+    'vite-plugin-pwa / Workbox' => 'Workbox', 'Claude Code plugin API' => 'Claude Code plugins', 'Google Gemini API' => 'Gemini API',
+    'Apache / .htaccess' => 'Apache', 'DredgeView survey formats' => 'DredgeView formats', 'Dexie' => 'Dexie / IndexedDB',
+];
+const DROP = ['Slides Framework', 'dataclasses', 'gentrk CLI', 'localStorage', 'Font Awesome', 'SweetAlert2'];
+const TIERS = [[10, 'Core', 'used in 10+ projects'], [5, 'Solid', 'used in 5 to 9 projects'], [0, 'Growing', 'used in a few projects']];
+
+$skills = [];
+foreach ($cols as $f) {
+    $tech = [];
+    foreach ($rows as $p) {
+        $mine = array_map(fn ($x) => ALIAS[Metier::short($x)] ?? Metier::short($x), $p['fam'][$f['id']] ?? []);
+        foreach (array_unique($mine) as $x) {
+            // a language listed under « tests » is the project's language, not a testing skill
+            if (! in_array($x, DROP, true) && ! ($f['id'] === 'tests' && $x === 'JavaScript')) {
+                $tech[$x] = ($tech[$x] ?? 0) + 1;
             }
-            $w = $W * count($p['fam'][$f['id']]) / $total;
-            $b .= '<rect x="'.round($x + 1.5, 1).'" y="3" width="'.round($w - 5, 1).'" height="10" rx="5" fill="'.thread($f['c'], $theme).'" stroke="'.$t['border'].'" stroke-width="2"/>';
-            $x += $w;
         }
-        $names = implode(', ', array_map(fn ($f) => $f['name'], array_filter($cols, fn ($f) => isset($p['fam'][$f['id']]))));
-        $out["sig-{$p['slug']}-$theme.svg"] = svg($W, 16, $p['title'].' skill threads: '.$names, $b);
     }
+    arsort($tech);
+    foreach (TIERS as $i => [$min]) {
+        if ($f['n'] >= $min) {
+            break;
+        }
+    }
+    $skills[] = $f + ['tech' => array_slice(array_keys($tech), 0, 6), 'tier' => $i];
 }
 
-// ── the weave: every project a row, every skill a thread ──
+// the loom: one thread per skill family, as long as the number of projects using it
 foreach ($THEMES as $theme => $t) {
-    $W = 1200;
-    $rowH = 30;
-    $top = 150;
-    $x0 = 360;
-    $colW = (1130 - $x0) / count($cols);
-    $b = '<text x="44" y="64" font-family="'.SANS.'" font-size="15" font-weight="700" fill="'.$t['ink2'].'">Each row is a shipped project, each thread a skill family found in its real stack.</text>';
-    $b .= '<text x="44" y="90" font-family="'.SANS.'" font-size="15" font-weight="700" fill="'.$t['ink2'].'">Where the thread rises in colour, the skill was used. Nothing hand-picked.</text>';
+    $W = 820;
+    $rowH = 46;
+    $x0 = 340;
+    $len = $W - $x0 - 90;
+    $max = max(array_column($skills, 'n'));
+    $y = 34;
+    $b = '';
+    foreach ($skills as $k => $f) {
+        if ($k === 0 || $f['tier'] !== $skills[$k - 1]['tier']) {
+            [, $label, $hint] = TIERS[$f['tier']];
+            $y += $k === 0 ? 0 : 14;
+            $b .= '<text x="40" y="'.($y + 14).'" font-family="'.SANS.'" font-size="14" font-weight="800" letter-spacing="3" fill="'.$t['accent'].'">'.e(mb_strtoupper($label)).'<tspan font-weight="600" letter-spacing="1" fill="'.$t['ink2'].'">  ·  '.e($hint).'</tspan></text>';
+            $y += 30;
+        }
+        $col = thread($f['c'], $theme);
+        $cy = $y + $rowH / 2;
+        $b .= '<rect x="40" y="'.($cy - 17).'" width="34" height="34" rx="8" fill="'.$t['cream'].'" stroke="'.$t['border'].'" stroke-width="2"/>'
+            .glyph($f, 45, $cy - 12, 24, $col)
+            .'<text x="88" y="'.($cy + 7).'" font-family="'.SANS.'" font-size="20" font-weight="800" fill="'.$t['ink'].'">'.e($f['name']).'</text>';
+        // the warp underneath, then the thread woven over and under it
+        $w = max(28, $len * $f['n'] / $max);
+        $b .= '<line x1="'.$x0.'" y1="'.$cy.'" x2="'.($x0 + $len).'" y2="'.$cy.'" stroke="'.$t['line'].'" stroke-width="2" stroke-dasharray="2 6"/>'
+            .'<rect x="'.$x0.'" y="'.($cy - 8).'" width="'.round($w, 1).'" height="16" rx="8" fill="'.$col.'" stroke="'.$t['border'].'" stroke-width="2"/>';
+        for ($sx = $x0 + 22; $sx < $x0 + $w - 14; $sx += 26) {
+            $b .= '<rect x="'.$sx.'" y="'.($cy - 8).'" width="5" height="16" fill="'.$t['paper'].'" opacity=".55"/>';
+        }
+        $b .= '<line class="trace" pathLength="1" style="animation-delay:'.round($k * .3, 2).'s" x1="'.($x0 + 6).'" y1="'.$cy.'" x2="'.round($x0 + $w - 6, 1).'" y2="'.$cy.'" stroke="#fffaf0" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>'
+            .'<text x="'.round($x0 + $w + 12, 1).'" y="'.($cy + 8).'" font-family="'.SERIF.'" font-size="22" font-weight="900" fill="'.$t['gold'].'">'.$f['n'].'</text>';
+        $y += $rowH;
+    }
+    $H = $y + 34;
+    $b = card($t, 6, 6, $W - 22, $H - 22, 22, 9).'<g transform="translate(0 6)">'.$b.'</g>';
+    $out["loom-$theme.svg"] = svg($W, $H, count($skills).' skill families, each as long as the number of projects that use it', $b);
+}
 
-    foreach ($cols as $j => $f) {
-        $cx = $x0 + $j * $colW + $colW / 2;
-        $col = thread($f['c'], $theme);
-        $b .= glyph($f, $cx - 13, 108, 26, $col);
-        // the warp thread
-        $b .= '<line x1="'.$cx.'" y1="'.($top - 6).'" x2="'.$cx.'" y2="'.($top + count($rows) * $rowH).'" stroke="'.$col.'" stroke-opacity=".28" stroke-width="3"/>';
+// the family icons used next to each skill in README.md
+foreach ($skills as $f) {
+    foreach ($THEMES as $theme => $t) {
+        $b = '<rect x="2" y="2" width="36" height="36" rx="9" fill="'.$t['cream'].'" stroke="'.$t['border'].'" stroke-width="2"/>'.glyph($f, 8, 8, 24, thread($f['c'], $theme));
+        $out["skill-{$f['id']}-$theme.svg"] = svg(40, 40, $f['name'], $b);
     }
-    foreach ($rows as $r => $p) {
-        $cy = $top + $r * $rowH + $rowH / 2;
-        $b .= '<line x1="44" y1="'.($cy + $rowH / 2).'" x2="1140" y2="'.($cy + $rowH / 2).'" stroke="'.$t['line'].'" stroke-width="1"/>';
-        $b .= '<text x="44" y="'.($cy + 5).'" font-family="'.SANS.'" font-size="12" font-weight="700" fill="'.$t['ink2'].'">'.e($p['year'] ?: 'live').'</text>';
-        $b .= '<text x="96" y="'.($cy + 6).'" font-family="'.SERIF.'" font-size="17" font-weight="'.(! empty($p['featured']) ? 900 : 600).'" fill="'.$t['ink'].'">'.e(mb_strimwidth($p['title'], 0, 28, '…')).'</text>';
-        foreach ($cols as $j => $f) {
-            if (! isset($p['fam'][$f['id']])) {
-                continue;
-            }
-            $cx = $x0 + $j * $colW + $colW / 2;
-            $n = count($p['fam'][$f['id']]);
-            $w = min($colW - 14, 18 + $n * 6);
-            $b .= '<rect x="'.round($cx - $w / 2, 1).'" y="'.($cy - 7).'" width="'.round($w, 1).'" height="14" rx="7" fill="'.thread($f['c'], $theme).'"/>';
-        }
-    }
-    // the shuttle: a band of light travelling across the rows
-    $b .= '<rect class="shuttle" style="--travel:'.((count($rows) - 1) * $rowH).'px" x="40" y="'.$top.'" width="1104" height="'.$rowH.'" rx="6" fill="'.$t['goldFill'].'" fill-opacity=".13"/>';
-    // legend chips
-    $ly = $top + count($rows) * $rowH + 34;
-    $x = 44;
-    foreach ($cols as $f) {
-        $label = $f['name'].'  '.$f['n'];
-        $w = 48 + mb_strlen($label) * 7.4;
-        if ($x + $w > 1150) {
-            $x = 44;
-            $ly += 46;
-        }
-        $col = thread($f['c'], $theme);
-        $b .= '<rect x="'.$x.'" y="'.$ly.'" width="'.round($w).'" height="34" rx="17" fill="'.$t['paper'].'" stroke="'.$t['border'].'" stroke-width="2"/>'
-            .glyph($f, $x + 10, $ly + 6, 22, $col)
-            .'<text x="'.($x + 38).'" y="'.($ly + 22).'" font-family="'.SANS.'" font-size="13" font-weight="700" fill="'.$t['ink'].'">'.e($f['name']).' <tspan font-weight="900" fill="'.$col.'">'.$f['n'].'</tspan></text>';
-        $x += round($w) + 10;
-    }
-    $H = $ly + 70;
-    $b = card($t, 6, 6, $W - 22, $H - 22, 24, 9).$b;
-    $out["weave-$theme.svg"] = svg($W, $H, 'The weave: '.count($rows).' projects across '.count($cols).' skill threads', $b);
 }
 
 // ── contact buttons ──
@@ -357,3 +357,23 @@ foreach ($out as $name => $svg) {
     file_put_contents($root.'/assets/'.$name, $svg);
 }
 echo count($out)." SVGs written to assets/\n";
+
+// ── README.md: the skills list between its markers, regenerated from the same data ──
+$pic = fn (string $name, string $alt, string $attr) => '<picture><source media="(prefers-color-scheme: dark)" srcset="assets/'.$name.'-dark.svg"><img src="assets/'.$name.'-light.svg" alt="'.$alt.'" '.$attr.'></picture>';
+$md = '';
+foreach ($skills as $k => $f) {
+    if ($k === 0 || $f['tier'] !== $skills[$k - 1]['tier']) {
+        [, $label, $hint] = TIERS[$f['tier']];
+        $md .= "\n**{$label}** <sub>· {$hint}</sub>\n";
+    }
+    $href = rtrim($id['origin'], '/').'/en/skills/'.Metier::SLUGS[$f['id']];
+    $md .= "\n".$pic('skill-'.$f['id'], '', 'height="22"')." **[{$f['name']}]({$href})** <sub>· {$f['n']} projects</sub><br>\n"
+        .implode(' ', array_map(fn ($x) => '`'.$x.'`', $f['tech']))."\n";
+}
+$readme = $root.'/README.md';
+$text = file_get_contents($readme);
+$new = preg_replace('~(<!-- skills:start[^>]*-->).*?(<!-- skills:end -->)~s', "$1\n".$md."\n$2", $text, 1, $n);
+if ($n) {
+    file_put_contents($readme, $new);
+    echo "README.md skills block updated\n";
+}

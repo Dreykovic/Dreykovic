@@ -1,77 +1,79 @@
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg"><img src="assets/header-light.svg" alt="Birewa Audrey Amona, fullstack engineer in Mindelo, Cabo Verde: 16 projects, 11 skill threads, 77 technologies" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg"><img src="assets/header-light.svg" alt="Birewa Audrey Amona, fullstack engineer in Mindelo, Cabo Verde: 11 skill families, 77 technologies, 16 projects" width="100%"></picture>
 
-I build **production-ready web products**: clean architecture, reliable backends, and apps that keep working when the connection doesn't. I'm based in Mindelo, Cabo Verde, and work remotely with teams and clients across West Africa and beyond.
-
-My work has covered maritime survey data for a Dutch dredging multinational, HR and pharmacy systems in daily production use, fintech and food-tech platforms, and AI consulting. These projects have thin margins, patchy connectivity, and processes that have to run every day. So I build offline-first, cheap to run, and honest about failure.
-
-- **Also:** external evaluator for MIT Solve · Master's researcher in Marine Sciences & Climate Change (WASCAL)
-- **Stack:** TypeScript · Node.js · React · Next.js · Vue · Laravel · PostgreSQL
+Fullstack engineer. I build web systems, data pipelines and offline-first apps that have to run every day, on thin margins and patchy connections. I'm based in Mindelo, Cabo Verde, and work remotely.
 
 > **Open to remote roles and freelance projects.** [Tell me what you're building →](https://birewa.com/en#contact)
 
 <br>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-work-dark.svg"><img src="assets/h-work-light.svg" alt="01 · Selected work: a few things worth a closer look" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-skills-dark.svg"><img src="assets/h-skills-light.svg" alt="01 · Skills: what I work with" width="100%"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sig-epi-fiche-generator-dark.svg"><img src="assets/sig-epi-fiche-generator-light.svg" alt="" width="38%"></picture>
+Every skill below is measured, not self-rated: each thread is as long as the number of my shipped projects that use it, and each technology is listed because it appears in those projects' real stacks.
 
-**[Coastal Survey Automation](https://birewa.com/en/work/coastal-survey)** · <sub>DATA TOOL · 2025</sub><br>
-Turns raw hydrographic survey data into the as-built control sheets that check that each coastal groyne is built to its design.<br>
-<sub>`Python` `VBA / Excel` `DredgeView survey formats` `CSV`</sub>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sig-optirh-dark.svg"><img src="assets/sig-optirh-light.svg" alt="" width="38%"></picture>
-
-**[OptiRH](https://birewa.com/en/work/optirh)** · <sub>PLATFORM · IN PRODUCTION</sub><br>
-The internal HR platform of ARCOP, Togo's public procurement regulator: staff records, leave and absence requests with their approvals, and HR document requests, all on software instead of paper.<br>
-<sub>`Laravel` `PHP` `MySQL` `Bootstrap` `DataTables`</sub>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sig-pharmacy-sys-dark.svg"><img src="assets/sig-pharmacy-sys-light.svg" alt="" width="38%"></picture>
-
-**[PharmaSys](https://birewa.com/en/work/pharmasys)** · <sub>PLATFORM · 2026</sub><br>
-Management software for the pharmacy of a medical-social centre in Togo: sales, batch stock, insurance claims, medical acts, purchasing, staff and accounting in one tool.<br>
-<sub>`Laravel` `PostgreSQL` `Tailwind CSS` `DomPDF`</sub>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sig-tchona-dark.svg"><img src="assets/sig-tchona-light.svg" alt="" width="38%"></picture>
-
-**[Tchona](https://birewa.com/en/work/tchona)** · <sub>OFFLINE-FIRST APP · 2026</sub> · [live ↗](https://tchona.vercel.app)<br>
-A phone app that shows a small trader their real turnover, margins and month-end forecast from the prices and sales they enter, and works with no internet.<br>
-<sub>`Vue 3` `TypeScript` `Dexie / IndexedDB` `Tailwind CSS`</sub>
-
-<sub>Client code lives in private repositories. I'm happy to walk you through it on request. [All 16 projects →](https://birewa.com/en/work)</sub>
-
-<br>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-open-dark.svg"><img src="assets/h-open-light.svg" alt="02 · Open source: code you can read" width="100%"></picture>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sig-issue-runner-dark.svg"><img src="assets/sig-issue-runner-light.svg" alt="" width="38%"></picture>
-
-**[issue-to-pr-runner](https://agensi.io/skills/issue-to-pr-runner)** · <sub>DEVELOPER TOOL · 2026</sub><br>
-A Claude Code plugin that turns a prompt into a reviewed pull request, one checkable artefact at a time.<br>
-<sub>`Node.js` `Claude Code plugins` `GitHub CLI` `git worktrees`</sub>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sig-cape-coast-logbook-dark.svg"><img src="assets/sig-cape-coast-logbook-light.svg" alt="" width="38%"></picture>
-
-**[wascal-cape-coast-2026](https://github.com/Dreykovic/wascal-cape-coast-2026)** · <sub>WEB APP · 2026</sub> · [live ↗](https://wascal.birewa.com)<br>
-A one-page site and a small self-service admin that turn a 16-week study programme abroad into a shared logbook for a 32-student West African cohort. No front-end build, and it deploys on shared hosting.<br>
-<sub>`Laravel 13` `MySQL / SQLite` `Vanilla JS`</sub>
-
-<br>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-weave-dark.svg"><img src="assets/h-weave-light.svg" alt="03 · The weave: the pattern is the work" width="100%"></picture>
-
-Every project is a row and every skill family a coloured thread, worked out from each project's real stack. Nothing is hand-picked.
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/loom-dark.svg"><img src="assets/loom-light.svg" alt="Skill families as threads, each as long as the number of projects using it" width="100%"></picture>
 
 <details>
-<summary><b>Show the weave</b>: 16 projects × 11 skill threads</summary>
-<br>
-<a href="https://birewa.com/en"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/weave-dark.svg"><img src="assets/weave-light.svg" alt="The weave: 16 projects as rows, 11 skill families as coloured threads" width="100%"></picture></a>
+<summary><b>Technologies behind each skill</b></summary>
+
+<!-- skills:start (generated by scripts/build.php, do not edit by hand) -->
+
+**Core** <sub>· used in 10+ projects</sub>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-front-dark.svg"><img src="assets/skill-front-light.svg" alt="" height="22"></picture> **[Front-end JS / TS](https://birewa.com/en/skills/front-end-vue-react-typescript)** <sub>· 14 projects</sub><br>
+`JavaScript` `Vite` `TypeScript` `Vue` `jQuery` `React`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-ui-dark.svg"><img src="assets/skill-ui-light.svg" alt="" height="22"></picture> **[Interface & design](https://birewa.com/en/skills/ui-integration-tailwind)** <sub>· 12 projects</sub><br>
+`Tailwind CSS` `Bootstrap` `HTML / CSS` `GSAP` `Nuxt UI`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-data-dark.svg"><img src="assets/skill-data-light.svg" alt="" height="22"></picture> **[Databases](https://birewa.com/en/skills/databases-mysql-postgresql)** <sub>· 11 projects</sub><br>
+`MySQL` `PostgreSQL` `Supabase` `SQLite` `Prisma`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-back-dark.svg"><img src="assets/skill-back-light.svg" alt="" height="22"></picture> **[Back-end Laravel / Node](https://birewa.com/en/skills/back-end-laravel-node)** <sub>· 10 projects</sub><br>
+`Laravel` `PHP` `Blade` `Node.js`
+
+**Solid** <sub>· used in 5 to 9 projects</sub>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-secu-dark.svg"><img src="assets/skill-secu-light.svg" alt="" height="22"></picture> **[Security & access](https://birewa.com/en/skills/security-access-control)** <sub>· 7 projects</sub><br>
+`Spatie Permission` `Web Crypto` `Laravel Sanctum` `Google reCAPTCHA` `Firebase Auth`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-devops-dark.svg"><img src="assets/skill-devops-light.svg" alt="" height="22"></picture> **[Deployment & CI](https://birewa.com/en/skills/deployment-docker-ci-cd)** <sub>· 7 projects</sub><br>
+`GitHub Actions` `Vercel` `Docker` `Shared hosting` `Apache` `Nginx`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-tests-dark.svg"><img src="assets/skill-tests-light.svg" alt="" height="22"></picture> **[Testing & quality](https://birewa.com/en/skills/testing-quality)** <sub>· 6 projects</sub><br>
+`PHPUnit` `Vitest` `Playwright` `ESLint` `Prettier` `Zod`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-docs-dark.svg"><img src="assets/skill-docs-light.svg" alt="" height="22"></picture> **[Documents & reporting](https://birewa.com/en/skills/documents-pdf-reporting)** <sub>· 5 projects</sub><br>
+`DomPDF` `ApexCharts` `VBA` `DataTables` `TCPDF`
+
+**Growing** <sub>· used in a few projects</sub>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-tools-dark.svg"><img src="assets/skill-tools-light.svg" alt="" height="22"></picture> **[Tooling & AI](https://birewa.com/en/skills/developer-tooling-ai)** <sub>· 4 projects</sub><br>
+`Git` `PostHog` `Claude Code plugins` `GitHub CLI` `git worktrees` `Gemini API`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-auto-dark.svg"><img src="assets/skill-auto-light.svg" alt="" height="22"></picture> **[Data & automation](https://birewa.com/en/skills/data-automation-python)** <sub>· 3 projects</sub><br>
+`Scheduled jobs` `Python` `DredgeView formats` `CSV` `Queues` `Echo + Pusher`
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/skill-offline-dark.svg"><img src="assets/skill-offline-light.svg" alt="" height="22"></picture> **[Offline-first & PWA](https://birewa.com/en/skills/offline-first-pwa)** <sub>· 2 projects</sub><br>
+`Workbox` `Dexie / IndexedDB`
+
+<!-- skills:end -->
+
 </details>
 
+<sub>The projects behind these numbers are on [birewa.com/work](https://birewa.com/en/work). Each skill has its own page there, listing the projects that use it.</sub>
+
 <br>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-contact-dark.svg"><img src="assets/h-contact-light.svg" alt="04 · Say hello: got a project to set afloat?" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-now-dark.svg"><img src="assets/h-now-light.svg" alt="02 · Now: what I'm building" width="100%"></picture>
 
-A web app, a platform, an internal tool, or an app that has to work offline: let's talk about what needs to run every day.
+- **[issue-to-pr-runner](https://agensi.io/skills/issue-to-pr-runner)**: a Claude Code plugin that turns a prompt into a reviewed pull request, one checkable artefact at a time.
+- **[wascal-cape-coast-2026](https://github.com/Dreykovic/wascal-cape-coast-2026)**: the open-source logbook of a 32-student WASCAL cohort ([live](https://wascal.birewa.com)). Laravel 13, no front-end build.
+- **Research**: Master's in Marine Sciences & Climate Change (WASCAL), the domain behind my geospatial and environmental data work.
+- **Reviewing**: external evaluator for MIT Solve.
+
+<br>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-contact-dark.svg"><img src="assets/h-contact-light.svg" alt="03 · Say hello: got a project to set afloat?" width="100%"></picture>
 
 <p>
 <a href="https://birewa.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/btn-site-dark.svg"><img src="assets/btn-site-light.svg" alt="birewa.com" height="52"></picture></a>
