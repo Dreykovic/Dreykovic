@@ -173,44 +173,39 @@ function svg(float $w, float $h, string $title, string $body): string
 
 $out = [];
 
-// ── header ──
+// ── header (1000 wide, so its type stays legible when GitHub scales it down on a phone) ──
 foreach ($THEMES as $theme => $t) {
-    $W = 1200;
-    $H = 460;
+    $W = 1000;
+    $H = 404;
     $b = card($t, 6, 6, $W - 24, $H - 24, 26, 10);
     $b .= '<clipPath id="k"><rect x="6" y="6" width="'.($W - 24).'" height="40" rx="26"/></clipPath><g clip-path="url(#k)">'.kente(6, 6, $W - 24, 16, 1.6).'</g>';
     $b .= '<line x1="6" y1="22" x2="'.($W - 18).'" y2="22" stroke="'.$t['border'].'" stroke-width="3"/>';
 
     // overline
-    $b .= '<g>'.adk('adinkrahene', 60, 68, 30, $t['accent'], .2, 7)
-        .'<text x="102" y="89" font-family="'.SANS.'" font-size="15" font-weight="800" letter-spacing="3.2" fill="'.$t['accent'].'">FULLSTACK ENGINEER · '.e(mb_strtoupper($id['city'].', '.$id['country'])).'</text></g>';
+    $b .= adk('adinkrahene', 50, 66, 34, $t['accent'], .2, 7)
+        .'<text x="96" y="90" font-family="'.SANS.'" font-size="17" font-weight="800" letter-spacing="3" fill="'.$t['accent'].'">FULLSTACK ENGINEER · '.e(mb_strtoupper($id['city'].', '.$id['country'])).'</text>';
     // name
-    $b .= '<text x="58" y="172" font-family="'.SERIF.'" font-size="76" font-weight="900" letter-spacing="-1.5" fill="'.$t['ink'].'">Birewa Audrey</text>';
-    $b .= '<text x="58" y="252" font-family="'.SERIF.'" font-size="76" font-weight="900" letter-spacing="-1.5" fill="'.$t['ink'].'">Amona<tspan fill="'.$t['goldFill'].'">.</tspan></text>';
-    // pitch
-    $b .= '<text font-family="'.SANS.'" font-size="22" fill="'.$t['ink2'].'">'
-        .'<tspan x="60" y="300">I build <tspan font-weight="800" fill="'.$t['gold'].'">production-ready</tspan> web products: clean architecture,</tspan>'
-        .'<tspan x="60" y="332">reliable backends, and apps that keep working offline.</tspan></text>';
+    $b .= '<text x="46" y="182" font-family="'.SERIF.'" font-size="84" font-weight="900" letter-spacing="-1.8" fill="'.$t['ink'].'">Birewa Audrey</text>';
+    $b .= '<text x="46" y="268" font-family="'.SERIF.'" font-size="84" font-weight="900" letter-spacing="-1.8" fill="'.$t['ink'].'">Amona<tspan fill="'.$t['goldFill'].'">.</tspan></text>';
     // stat pills
-    $stats = [[count($rows), 'projects'], [count($cols), 'skill threads'], [$techCount, 'technologies'], [min($years).'–'.max($years), 'shipping']];
-    $x = 60;
-    foreach ($stats as $i => [$n, $label]) {
-        $nw = mb_strlen((string) $n) * 14 + 4;
-        $w = $nw + mb_strlen($label) * 8.6 + 44;
-        $b .= '<g>'
-            .'<rect x="'.$x.'" y="364" width="'.$w.'" height="46" rx="23" fill="'.$t['paper'].'" stroke="'.$t['border'].'" stroke-width="2.5"/>'
-            .'<text x="'.($x + 20).'" y="395" font-family="'.SERIF.'" font-size="24" font-weight="900" fill="'.$t['gold'].'">'.e((string) $n).'</text>'
-            .'<text x="'.($x + 26 + $nw).'" y="393" font-family="'.SANS.'" font-size="15" font-weight="700" fill="'.$t['ink'].'">'.e($label).'</text></g>';
+    $stats = [[count($rows), 'projects'], [count($cols), 'skill threads'], [$techCount, 'technologies']];
+    $x = 50;
+    foreach ($stats as [$n, $label]) {
+        $nw = mb_strlen((string) $n) * 17 + 4;
+        $w = $nw + mb_strlen($label) * 10 + 44;
+        $b .= '<rect x="'.$x.'" y="304" width="'.$w.'" height="52" rx="26" fill="'.$t['paper'].'" stroke="'.$t['border'].'" stroke-width="2.5"/>'
+            .'<text x="'.($x + 20).'" y="340" font-family="'.SERIF.'" font-size="28" font-weight="900" fill="'.$t['gold'].'">'.e((string) $n).'</text>'
+            .'<text x="'.($x + 26 + $nw).'" y="337" font-family="'.SANS.'" font-size="18" font-weight="700" fill="'.$t['ink'].'">'.e($label).'</text>';
         $x += $w + 12;
     }
 
     // the woven B: lit points take the thread colours in column order
     $B = ['11110', '10001', '10001', '11110', '10001', '10001', '11110'];
-    $cell = 34;
-    $gap = 7;
-    $bx = 880;
-    $by = 92;
-    $b .= '<g class="spin" opacity=".9">'.adk('nsoromma', 820, 60, 330, $t['line'], 0, 1.4).'</g>';
+    $cell = 31;
+    $gap = 6;
+    $bx = 752;
+    $by = 72;
+    $b .= '<g class="spin" opacity=".9">'.adk('nsoromma', 690, 44, 300, $t['line'], 0, 1.4).'</g>';
     $k = 0;
     foreach ($B as $r => $line) {
         foreach (str_split($line) as $c => $v) {
@@ -225,60 +220,46 @@ foreach ($THEMES as $theme => $t) {
             }
         }
     }
-    $b .= '<text x="'.($bx + 2.5 * $cell + 2 * $gap).'" y="'.($by + 7 * ($cell + $gap) + 22).'" text-anchor="middle" font-family="'.SANS.'" font-size="12" font-weight="800" letter-spacing="2.5" fill="'.$t['ink2'].'">ONE THREAD PER SKILL</text>';
+    $b .= '<text x="'.($bx + 2.5 * $cell + 2 * $gap).'" y="'.($by + 7 * ($cell + $gap) + 20).'" text-anchor="middle" font-family="'.SANS.'" font-size="13" font-weight="800" letter-spacing="2.5" fill="'.$t['ink2'].'">ONE THREAD PER SKILL</text>';
 
     $out["header-$theme.svg"] = svg($W, $H, 'Birewa Audrey Amona, fullstack engineer in Mindelo, Cabo Verde', $b);
 }
 
-// ── section headings ──
+// ── section headings (800 wide for the same reason as the header) ──
 $heads = [
     'work' => ['nkyinkyim', '01 · '.mb_strtoupper($site['copy']['en']['work']['label']), $site['copy']['en']['work']['title']],
-    'weave' => ['akomantoso', '02 · THE WEAVE', 'The pattern is the work.'],
-    'contact' => ['sankofa', '03 · SAY HELLO', 'Got a project to set afloat?'],
+    'open' => ['neaonnim', '02 · OPEN SOURCE', 'Code you can read.'],
+    'weave' => ['akomantoso', '03 · THE WEAVE', 'The pattern is the work.'],
+    'contact' => ['sankofa', '04 · SAY HELLO', 'Got a project to set afloat?'],
 ];
 foreach ($heads as $key => [$sym, $over, $title]) {
     foreach ($THEMES as $theme => $t) {
-        $b = adk($sym, 4, 6, 34, $t['accent'], .1, 6)
-            .'<text x="50" y="30" font-family="'.SANS.'" font-size="15" font-weight="800" letter-spacing="3.2" fill="'.$t['accent'].'">'.e($over).'</text>'
-            .'<text x="2" y="92" font-family="'.SERIF.'" font-size="46" font-weight="900" letter-spacing="-1" fill="'.$t['ink'].'">'.e($title).'</text>';
-        $out["h-$key-$theme.svg"] = svg(1200, 112, $title, $b);
+        $b = adk($sym, 2, 4, 36, $t['accent'], .1, 6)
+            .'<text x="50" y="30" font-family="'.SANS.'" font-size="17" font-weight="800" letter-spacing="3" fill="'.$t['accent'].'">'.e($over).'</text>'
+            .'<text x="2" y="88" font-family="'.SERIF.'" font-size="44" font-weight="900" letter-spacing="-1" fill="'.$t['ink'].'">'.e($title).'</text>';
+        $out["h-$key-$theme.svg"] = svg(800, 104, $title, $b);
     }
 }
 
-// ── featured project cards ──
-$symbols = ['nkyinkyim', 'akomantoso', 'nyamedua', 'aya'];
-foreach (array_values(array_filter($rows, fn ($p) => ! empty($p['featured']))) as $i => $p) {
+// ── project signatures: one band per thread, as wide as its share of the stack ──
+// for the projects README.md shows: the featured ones and the public ones
+const SHOWN = ['cape-coast-logbook', 'issue-runner'];
+foreach (array_filter($rows, fn ($p) => ! empty($p['featured']) || in_array($p['slug'], SHOWN, true)) as $p) {
     foreach ($THEMES as $theme => $t) {
-        $W = 600;
-        $H = 330;
-        $c = thread($p['dom']['c'], $theme);
-        $b = card($t, 4, 4, $W - 18, $H - 18, 20, 8);
-        $b .= '<clipPath id="c"><rect x="4" y="4" width="'.($W - 18).'" height="60" rx="20"/></clipPath><rect x="4" y="4" width="'.($W - 18).'" height="12" fill="'.$c.'" clip-path="url(#c)"/>';
-        $b .= '<line x1="4" y1="16" x2="'.($W - 14).'" y2="16" stroke="'.$t['border'].'" stroke-width="3"/>';
-        $b .= adk($symbols[$i % 4], $W - 150, $H - 170, 130, $c, .3, 3, .28);
-        $meta = mb_strtoupper(($p['category']['en'] ?? '').($p['year'] ? ' · '.$p['year'] : ''));
-        $b .= '<text x="36" y="56" font-family="'.SANS.'" font-size="13" font-weight="800" letter-spacing="2.6" fill="'.$c.'">'.e($meta).'</text>';
-        $b .= '<text x="34" y="104" font-family="'.SERIF.'" font-size="38" font-weight="900" letter-spacing="-.8" fill="'.$t['ink'].'">'.e($p['title']).'</text>';
-        $lines = wrap($p['short']['en']['text'], 500, 17, .5, 4);
-        $b .= '<text font-family="'.SANS.'" font-size="17" fill="'.$t['ink2'].'">';
-        foreach ($lines as $n => $l) {
-            $b .= '<tspan x="36" y="'.(140 + $n * 25).'">'.e($l).'</tspan>';
-        }
-        $b .= '</text>';
-        // the card signature: one band per thread, as wide as its share of the stack
-        $total = array_sum(array_map('count', $p['fam']));
-        $x = 36;
-        $sw = 380;
+        $W = 800;
+        $total = array_sum(array_map('count', $p['fam'])) ?: 1;
+        $b = '';
+        $x = 0;
         foreach ($cols as $f) {
             if (! isset($p['fam'][$f['id']])) {
                 continue;
             }
-            $w = $sw * count($p['fam'][$f['id']]) / $total;
-            $b .= '<rect x="'.round($x, 1).'" y="262" width="'.round($w - 3, 1).'" height="12" rx="3" fill="'.thread($f['c'], $theme).'"/>';
+            $w = $W * count($p['fam'][$f['id']]) / $total;
+            $b .= '<rect x="'.round($x + 1.5, 1).'" y="3" width="'.round($w - 5, 1).'" height="10" rx="5" fill="'.thread($f['c'], $theme).'" stroke="'.$t['border'].'" stroke-width="2"/>';
             $x += $w;
         }
-        $b .= '<text x="'.($W - 40).'" y="273" text-anchor="end" font-family="'.SANS.'" font-size="14" font-weight="800" fill="'.$t['ink'].'">Case study →</text>';
-        $out["card-{$p['slug']}-$theme.svg"] = svg($W, $H, $p['title'].': '.$p['short']['en']['text'], $b);
+        $names = implode(', ', array_map(fn ($f) => $f['name'], array_filter($cols, fn ($f) => isset($p['fam'][$f['id']]))));
+        $out["sig-{$p['slug']}-$theme.svg"] = svg($W, 16, $p['title'].' skill threads: '.$names, $b);
     }
 }
 
