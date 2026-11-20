@@ -71,7 +71,7 @@ Measured, not self-rated: each bar is as long as the number of my shipped projec
 ## Contact
 
 <a href="https://birewa.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/btn-site-dark.svg"><img src="assets/btn-site-light.svg" alt="birewa.com" height="36"></picture></a>
-<a href="https://www.linkedin.com/in/audrey-amona/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/btn-linkedin-dark.svg"><img src="assets/btn-linkedin-light.svg" alt="LinkedIn" height="36"></picture></a>
+<a href="https://www.linkedin.com/in/birewa-amona/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/btn-linkedin-dark.svg"><img src="assets/btn-linkedin-light.svg" alt="LinkedIn" height="36"></picture></a>
 <a href="mailto:dreybirewa@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/btn-email-dark.svg"><img src="assets/btn-email-light.svg" alt="Email" height="36"></picture></a>
 
 <sub>dreybirewa@gmail.com · Mindelo, Cabo Verde (UTC−1) · [Lire en français](https://birewa.com/fr)</sub>
